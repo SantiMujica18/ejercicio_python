@@ -1,0 +1,37 @@
+"""En una plataforma de infraestructura existen objetos PaqueteCodigo que contienen el nombre de la aplicación, la versión de lanzamiento y la rama de Git de origen. También existe la clase ServidorDespliegue que tiene una dirección IP, 
+el entorno (Producción o Staging) y un método desplegar(). Modela cómo un ServidorDespliegue procesa e instala un 
+PaqueteCodigo en un momento puntual sin adueñarse de él."""
+
+class PaqueteCodigo:
+    def __init__(self,nombre,version,git):
+        self.nombre = nombre
+        self.version = version
+        self.git = git
+
+    
+
+
+
+
+
+
+class ServidorDespliegue:
+    def __init__(self,dirrecion_ip, entorno):
+        self.dirrecion_ip = dirrecion_ip
+        self.entorno = entorno
+
+    def desplegar(self,paquetes):
+        return f"""
+        Instalacion de paquete...
+        Nombre: {paquetes.nombre}
+        Version: {paquetes.version}
+        Version Rama Git: {paquetes.git}
+
+"""
+
+
+crearPaquete = PaqueteCodigo("Proyecto practica", 1.0, "Rama/Developer")
+
+servidor = ServidorDespliegue("198.165.0.1", "Virtual")
+
+print(servidor.desplegar(crearPaquete))
