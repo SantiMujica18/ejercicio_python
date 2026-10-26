@@ -1,0 +1,48 @@
+"""
+Los desarrolladores crean objetos de tipo Plugin que tienen un nombre, un autor y un método ejecutar_extension(). Un EditorCodigo permite al usuario instalar varios de estos plugins ya existentes en una colección interna para potenciar sus funciones. Si el usuario desinstala el EditorCodigo, los objetos Plugin originales deben permanecer disponibles en el catálogo general para poder instalarse en otro editor.
+
+"""
+
+class Plugin:
+    def __init__(self,nombre, autor):
+        self.nombre = nombre
+        self.autor = autor
+
+    def __str__(self):
+        return f"""
+        Nombre: {self.nombre}
+        Autor: {self.autor}
+        
+"""
+
+
+class EditorCodigo:
+    def __init__(self):
+           self.lista_plugin = []
+   
+    def registrar_plugin(self, añadir):
+        self.lista_plugin.append(añadir)
+
+    def remover_plugin(self,remove):
+            if remove in self.lista_plugin:
+                self.lista_plugin.remove(remove)
+                print("Se removio objeto de la lista")
+
+    def mostrar_plugin(self):
+        for i in self.lista_plugin:
+            print(i)
+
+
+accion = EditorCodigo()
+
+p1 = Plugin("Plugin1", "Jaime")
+p2 = Plugin("Plugin2", "Andres")
+
+accion.registrar_plugin(p1)
+accion.registrar_plugin(p2)
+
+
+accion.mostrar_plugin()
+
+
+accion.registrar_plugin(p1)
