@@ -1,0 +1,39 @@
+"""
+Un sistema administrativo maneja objetos de tipo DocumentoDatos que contienen un título y un diccionario con ventas mensuales. 
+Por otro lado, existe una herramienta utilitaria llamada ExportadorPDF que cuenta con la configuración de tamaño de página (A4, Carta) y 
+un método generar_pdf(). Dicho método debe recibir un DocumentoDatos, leer su información e imprimir en pantalla el resultado formateado, 
+sin que el exportador almacene el documento una vez finalizada la tarea.
+
+"""
+class DocumentoDatos:
+    def __init__(self, titulo, crearDiccioario):
+        self.titulo = titulo
+        self.crearDiccioario = crearDiccioario
+
+
+
+class ExportadorPDF:
+    def __init__(self, tamano, tipo):
+        self.tamano = tamano
+        self.tipo = tipo
+
+    def generar_pdf(self,documentoDatos):
+            return f"""
+            Titulo: {documentoDatos.titulo}
+            Tamaño pagina: {self.tamano}
+            Tipo pagina: {self.tipo}
+            diccionario: {documentoDatos.crearDiccioario}
+    """
+
+diccionarios = {
+     "Proyecto": 1,
+     "Paginas": 22,
+     "Fecha final": "2026-26-11"
+}
+
+crear = DocumentoDatos("happy Mind", diccionarios)
+
+
+exportar = ExportadorPDF("A4", "Carta")
+
+print(exportar.generar_pdf(crear))
