@@ -1,0 +1,51 @@
+
+class ServidorWeb:
+    def __init__(self, direccion_ip, ram, estado):
+        self.direccion_ip = direccion_ip
+        self.ram = ram
+        self.estado = estado
+
+    def __str__(self):
+        return (
+            f"Servidor(IP: {self.direccion_ip}, RAM: {self.ram},"
+            f" Estado: {self.estado})"
+        )
+
+
+
+class BalanceadorCarga:
+    def __init__(self):
+        self.lista_servidores = []
+
+    def registrar_servidor(self, añadir):
+        self.lista_servidores.append(añadir)
+
+    def remover_servidor(self,remove):
+        for i in self.lista_servidores:
+            if i in self.lista_servidores:
+                self.lista_servidores.remove(remove)
+                print("Se removio objeto de la lista")
+
+    def mostrar_activos(self):
+        for i in self.lista_servidores:
+            if i in self.lista_servidores:
+                print(i)
+
+editor_servidor = BalanceadorCarga()
+
+p1 = ServidorWeb("198.168.0.1", "6-RAM","Activo")
+p2 = ServidorWeb("198.168.0.2", "8-RAM","Activo")
+
+editor_servidor.registrar_servidor(p1)
+editor_servidor.registrar_servidor(p2)
+
+
+
+editor_servidor.mostrar_activos()
+
+
+
+editor_servidor.remover_servidor(p2)
+
+
+editor_servidor.registrar_servidor(p2)
