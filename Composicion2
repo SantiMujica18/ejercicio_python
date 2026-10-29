@@ -1,0 +1,50 @@
+"""
+Cada vez que se instancia una TransaccionPago (con un monto y una cuenta destino), esta genera obligatoriamente en el mismo instante su propio RegistroAuditoria interno, el cual guarda el sello de tiempo exacto (timestamp) y un código hash de seguridad único para esa operación. El RegistroAuditoria no puede crearse fuera de una transacción ni sobrevivir si la TransaccionPago a la que pertenece es eliminada de la memoria.
+
+"""
+from datetime import datetime
+fecha = datetime.now()
+
+class TransaccionPago:
+    def __init__(self, monto, cuenta_destino):
+        self.monto = monto
+        self.cuenta_destino = cuenta_destino
+
+    def __str__(self):
+        return f"Fecha de guardaro: {fecha} y codigo {self.cuenta_destino}"
+
+
+class RegistroAuditoria:
+    def __init__(self, num_auditoria):
+        self.num_auditoria = num_auditoria
+        self.listas = []
+
+    def crear_auditoria(self, num_transacion):
+        self.listas.append(num_transacion)
+
+    def listar_auditoria(self):
+        for num_transacion in self.listas:
+            print(num_transacion)
+    def remover_auditoria(self,num_transacion):
+        if num_transacion in self.listas:
+            self.listas.remove(num_transacion)
+            print("Auditoria eliminada")
+
+p1 = TransaccionPago(1000,12345)
+p2 = TransaccionPago(2000,4321)
+
+gestion = RegistroAuditoria(1)
+
+gestion.crear_auditoria(p1)
+gestion.crear_auditoria(p2)
+
+print()
+print("Lista de auditoria")
+gestion.listar_auditoria()
+
+
+gestion.remover_auditoria(p1)
+
+print()
+print("Lista de auditoria")
+gestion.listar_auditoria()
