@@ -1,0 +1,54 @@
+"""
+Cuando se inicializa un GestorBaseDatos pasándole únicamente la URL del servidor, este debe construir automáticamente en su interior su propio PoolConexiones (encargado de administrar un límite fijo de conexiones simultáneas y cerrar los sockets). Ningún otro componente externo crea ni tiene acceso directo independiente al PoolConexiones; si el GestorBaseDatos es destruido en memoria, su PoolConexiones deja de existir con él.
+
+"""
+
+class GestorBaseDatos:
+    def __init__(self, URL):
+        self.URL = URL
+
+    def __str__(self):
+        return self.URL
+        
+
+
+
+class PoolConexiones:
+    def __init__(self, pool_conexion):
+        self.pool_conexion = pool_conexion
+        self.conexiones = []
+
+
+    def crear_conexion(self,conexion):
+        print("Conexion agregada correctamente")
+        self.conexiones.append(conexion)
+        
+
+    def listar_conexiones(self):
+        for conexion in self.conexiones:
+            print(conexion)
+
+    def eliminar_conexiones(self,conexion):
+        if conexion in self.conexiones:
+            self.conexiones.remove(conexion)
+            print("Se removió la conexión")
+        else:
+            print("La conexión no existe en el pool")
+
+
+connection = GestorBaseDatos("https://www.google.com.co")
+connection2 = GestorBaseDatos("https://www.google22.com.co")
+
+pool = PoolConexiones("Conexion 'https://www.google.com.co/' ")
+
+pool.crear_conexion(connection)
+pool.crear_conexion(connection2)
+
+print("Se listan las conexiones")
+pool.listar_conexiones()
+
+
+pool.eliminar_conexiones(connection)
+
+
+pool.listar_conexiones()
